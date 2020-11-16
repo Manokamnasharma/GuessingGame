@@ -2,6 +2,7 @@ README.md: guessinggame.sh
 	touch README.md
 	echo "# Guessingame" > README.md
 	echo "Make was run at  `date`" >> README.md
-	echo "The number of lines of code contained in guessinggame.sh is: `wc -l guessinggame.sh | cut -d ' ' -f 1`" >> README.md
+	echo "\n**Number of lines in guessinggame.sh:** " >> README.md
+	grep -c '' guessinggame.sh >> README.md
 clean:
 	rm README.md
