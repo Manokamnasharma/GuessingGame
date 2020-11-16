@@ -1,25 +1,23 @@
-n_lines = $(ls | wc -l)
-input_ = 0
+echo "[Welcome to Guessing game]"
 
-function test {
-    if [[ input_ -lt n_lines  ]]
-    then
-        local answer = "Your guess was too low"
-    elif [[ input_ -gt n_lines  ]]
-    then
-        local answer = "Your guess was too high"
-    else
-        local answer = "CONGRATULATIONS !!!"
-    fi
-    echo $answer 
+function question {
+	echo "Please enter the number of files in the current directory:"
+	read response
+    files=$(ls -1 | wc -l)
 }
 
-while [[ input_ -ne n_lines ]]
+question
+
+while [[ $response -ne $files ]]
 do
-    echo "Guess how many files are in the current directory !"
-    echo "Write the number of files, then press 'Enter':"
-    read input_
-    clear
-    echo "$(test)"
-    echo ""
+	if [[ $response -lt $files ]] 
+	then
+		echo "Your Guess is low. Try Higher"
+	else
+		echo "Your Guess is high. Try Lower"
+	fi
+	question
 done
+
+echo "Well done! It is the correct answer, here is the list of files:"
+echo "-------------" && ls -1
